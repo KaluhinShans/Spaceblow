@@ -17,11 +17,11 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

@@ -18,18 +18,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepo userRepo;
+    private  UserRepo userRepo;
 
-    @Autowired
-    private MailSender mailSender;
+    private  MailSender mailSender;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${site.path}")
     private String sitePath;
 
+    public UserService(PasswordEncoder passwordEncoder, UserRepo userRepo, MailSender mailSender) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepo = userRepo;
+        this.mailSender = mailSender;
+    }
 
 
     @Override
