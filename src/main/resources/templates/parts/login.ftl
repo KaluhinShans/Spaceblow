@@ -3,20 +3,54 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="username" placeholder="User name">
+                <input type="text" value="<#if user??>${user.username}</#if>"
+                       class="form-control ${(usernameError??)?string('is-invalid','')}"
+                       name="username" placeholder="User name">
+                <#if usernameError??>
+                    <div class="invalid-feedback">
+                        ${usernameError}
+                    </div>
+                </#if>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Password: </label>
             <div class="col-sm-6">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password"
+                       class="form-control ${(passwordError??)?string('is-invalid','')}"
+                       name="password" placeholder="Password">
+                <#if passwordError??>
+                    <div class="invalid-feedback">
+                        ${passwordError}
+                    </div>
+                </#if>
             </div>
         </div>
         <#if isRegisterForm>
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> Confirm password: </label>
+                <div class="col-sm-6">
+                    <input type="password"
+                           class="form-control ${(password2Error??)?string('is-invalid','')}"
+                           name="password2" placeholder="Confirm password">
+                    <#if password2Error??>
+                        <div class="invalid-feedback">
+                            ${password2Error}
+                        </div>
+                    </#if>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label"> Email: </label>
                 <div class="col-sm-6">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="email" value="<#if user??>${user.email}</#if>"
+                           class="form-control ${(emailError??)?string('is-invalid','')}"
+                           name="email" placeholder="Email">
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
                 </div>
             </div>
         </#if>
@@ -24,7 +58,8 @@
         <#if !isRegisterForm>
             <a href="/registration">Add new user</a>
         </#if>
-        <button type="submit" class="btn btn-primary">
+        <br>
+        <button type="submit" class="btn btn-primary mt-3">
             <#if isRegisterForm>Create<#else>Sign In</#if></button>
     </form>
 </#macro>

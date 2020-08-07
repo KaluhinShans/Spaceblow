@@ -16,7 +16,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/index">Messages</a>
             </li>
-            <#if user??>
+            <#if name!="">
             <li class="nav-item">
                 <a class="nav-link" href="/user/profile">Profile</a>
             </li>
@@ -27,7 +27,7 @@
                 </li>
             </#if>
         </ul>
-        <#if user??>
+        <#if name != "">
             <div class="navbar-text mr-3">${name}</div>
             <@l.logout />
         </#if>

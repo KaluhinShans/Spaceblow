@@ -3,8 +3,10 @@ package com.shans.spaceblow.controller;
 import com.shans.spaceblow.domain.Role;
 import com.shans.spaceblow.domain.User;
 import com.shans.spaceblow.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -62,6 +66,7 @@ public class UserController {
              @RequestParam String email
     ){
         userService.updateProfile(user, password, email);
+        user.setPassword(passwordEncoder.encode(password));
         return "redirect:/user/profile";
     }
 }
