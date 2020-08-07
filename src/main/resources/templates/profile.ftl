@@ -2,8 +2,15 @@
 
 <@c.page>
     <h5>${username}</h5>
-    ${message?ifExists}
+
     <form method="post">
+        <#if emailMessage??>
+        <div class="form-group row">
+            <div class="alert alert-${emailMessageType}" role="alert">
+                ${emailMessage}
+            </div>
+        </div>
+        </#if>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Email: </label>
             <div class="col-sm-6">
